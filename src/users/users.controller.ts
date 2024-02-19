@@ -1,16 +1,17 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-import { User } from './entities/user.entity';
+import { AppService } from './users.service';
+import { UserEntity } from './entities/user.entity';
 
 @Controller()
-export class AppController {
+export class UsersController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  async getHello(): Promise<User[]> {
+  async getHello(): Promise<UserEntity[]> {
     const dataUser = await this.appService.findAll();
 
-    console.log(dataUser);
+    console.log(dataUser.length);
+
     console.log(process.env.MONGO_HOST);
     return dataUser;
   }
